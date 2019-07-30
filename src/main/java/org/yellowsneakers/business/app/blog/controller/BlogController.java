@@ -15,9 +15,14 @@
  */
 package org.yellowsneakers.business.app.blog.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.yellowsneakers.business.app.blog.service.BladeUserService;
 
 /**
  * 
@@ -27,9 +32,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/blog")
 public class BlogController {
+	
+	@Autowired
+	private BladeUserService userService;
 
 	@GetMapping("/index")
-	public String index() {
-		return "index";
+	public Object index() {
+		List<Map<String, Object>> users = userService.getUsers();
+		return users;
 	}
 }

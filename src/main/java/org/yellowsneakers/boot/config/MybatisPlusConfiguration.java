@@ -35,6 +35,10 @@ import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 @MapperScan("org.yellowsneakers.business.**.mapper.**")
 public class MybatisPlusConfiguration {
 
+	/**
+	 * mybatis-plus分页插件
+	 * @return
+	 */
 	@Bean
 	public PaginationInterceptor paginationInterceptor() {
 		return new PaginationInterceptor();

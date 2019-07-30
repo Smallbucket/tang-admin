@@ -25,6 +25,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.yellowsneakers.boot.filter.RubberCorsFilter;
 import org.yellowsneakers.boot.interceptor.SecureInterceptor;
+import org.yellowsneakers.boot.runner.AppConstants;
+import org.yellowsneakers.boot.runner.RubberProperties;
 
 import lombok.AllArgsConstructor;
 
@@ -36,15 +38,20 @@ import lombok.AllArgsConstructor;
 @Order
 @Configuration
 @AllArgsConstructor
+//@AutoConfigureAfter(RubberProperties.class)
 public class SecureConfigure implements WebMvcConfigurer {
+	
+	private final RubberProperties rubberProperties;
 
 	private final SecureRegistry secureRegistry;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new SecureInterceptor())
-				.excludePathPatterns(secureRegistry.getExcludePatterns())
-				.excludePathPatterns(secureRegistry.getDefaultExcludePatterns());
+		if(!AppConstants.DEV_CDOE.equals(rubberProperties.getEnv())) {
+			registry.addInterceptor(new SecureInterceptor())
+					.excludePathPatterns(secureRegistry.getExcludePatterns())
+					.excludePathPatterns(secureRegistry.getDefaultExcludePatterns());
+		}
 	}
 	
 	/**

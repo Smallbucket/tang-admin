@@ -29,14 +29,12 @@ import org.yellowsneakers.boot.TokenArgumentResolver;
 import org.yellowsneakers.core.upload.RubberUploadProperties;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * WEB配置
  * @author tang
  * @since  1.0
  */
-@Slf4j
 @Configuration
 @EnableCaching
 @Order(Ordered.HIGHEST_PRECEDENCE)
